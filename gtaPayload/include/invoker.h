@@ -2,7 +2,6 @@
 
 #include "types.h"
 #include <utility>
-
 struct NativeArg_s {
 	u64* returnValue;
 	u32 argCount;
@@ -16,8 +15,9 @@ struct NativeArg_s {
 
 extern NativeArg_s nativeArg;
 
-extern void resetArgs();
-extern void setVectors();
+void callHash(u64 hash);
+void resetArgs();
+void setVectors();
 
 template<typename T>
 inline void pushArg(T value) {
@@ -31,11 +31,11 @@ inline R getReturn() {
 }
 
 template<typename N, typename... A>
-N invoke(u64 nativeAddress, A &&... args)
+N invoke(u64 hash, A &&... args)
 {
 	resetArgs();
 	int dummy[] = { 0, ((void)pushArg(std::forward<A>(args)), 0) ... };
-	((void(*)(NativeArg_s*))(void*)nativeAddress)(&nativeArg);
+	callHash(hash);
 	setVectors();
 	return getReturn<N>();
 }

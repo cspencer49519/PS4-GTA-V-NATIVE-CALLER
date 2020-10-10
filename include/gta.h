@@ -3,7 +3,7 @@
 #include "type.h"
 
 // Same for all regions
-#define PayloadAddress (void*)0x31B61A4
+#define PayloadAddress (void*)0x31B6190
 #define GTAVarsAddress (void*)0x31C80FA
 
 #define SyscallAddress (void*)0x31B616C
@@ -20,20 +20,14 @@ syscall
 ret
 */
 
-// Location not important, this is a random place in the EBOOT to detect region and version
-#define GameCheckAddress (void*)0xD8F304
-#define GameCheck127Bytes 0xD089000000A78388
-#define GameCheck100USBytes 0x8B10478B48535641
-#define GameCheck100EUBytes 0x00841F0F2E666666
+// Location not important, just any place in the EBOOT that the regions differ
+#define RegionCheckAddress (void*)0xFBDBD4
+// #define USRegionBytes
+#define RegionBytes 0x4410478B48535641
 
 // IS_PLAYER_ONLINE
-#define HookAddress (void*)0xFBDD59
-#define HookBytes 0x48, 0xC7, 0xC1, 0xA4, 0x61, 0x1B, 0x03, 0xFF, 0xD1, 0x90
-/*
-mov rcx, 0x31B61A4 // PayloadAddress
-call rcx
-nop
-*/
+#define HookAddress (void*)0xFBDD59//0xD8F499 1.27 & 1.00
+#define HookBytes 0x48, 0xC7, 0xC1, 0x90, 0x61, 0x1B, 0x03, 0xFF, 0xD1, 0x90//0x48, 0xC7, 0xC1, 0xB0, 0xD2, 0xB9, 0x02, 0xFF, 0xD1, 0x90
 
 struct _gtaVars {
 	BOOL allocationNeeded;
@@ -43,4 +37,4 @@ struct _gtaVars {
 };
 static struct _gtaVars *gtaVars = (struct _gtaVars*)GTAVarsAddress;
 
-extern BOOL nativeHook();
+BOOL nativeHook();

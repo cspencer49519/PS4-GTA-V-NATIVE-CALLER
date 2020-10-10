@@ -15,6 +15,10 @@ void setVectors() {
 	}
 }
 
+void callHash(u64 hash) {
+	((void(*)(NativeArg_s*))hash)(&nativeArg);
+}
+
 void resetArgs() {
 	nativeArg.argCount = 0;
 	nativeArg.vectorCount = 0;

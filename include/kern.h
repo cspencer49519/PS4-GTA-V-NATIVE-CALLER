@@ -4,10 +4,10 @@
 #include "ps4.h"
 
 #define	KERN_XFAST_SYSCALL 0x1C0
-#define KERN_PROCESS_ASLR 0x194875
-#define KERN_PRISON_0 0x10986A0
-#define KERN_ROOTVNODE 0x22C1A70
-#define KERN_PTRACE_CHECK 0x30D9AA
+#define KERN_PROCESS_ASLR 0x3CECE1
+#define KERN_PRISON_0 0x113E518
+#define KERN_ROOTVNODE 0x2300320
+#define KERN_PTRACE_CHECK 0x10F879
 
 #define X86_CR0_WP (1 << 16)
 
@@ -59,4 +59,4 @@ struct thread {
 	struct proc *td_proc;
 };
 
-extern int kernelPayload(struct thread *td, void* uap);
+int kernelPayload(struct thread *td, void* uap);
