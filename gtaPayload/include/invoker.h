@@ -2,6 +2,7 @@
 
 #include "types.h"
 #include <utility>
+
 struct NativeArg_s {
 	u64* returnValue;
 	u32 argCount;

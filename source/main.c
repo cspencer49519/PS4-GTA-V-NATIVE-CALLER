@@ -23,7 +23,7 @@ BOOL regionCheck() {
 	procReadBytes(gamePID, RegionCheckAddress, (void*)&gameCheck, sizeof(gameCheck));
 
 	if (gameCheck == RegionBytes) {
-		sysNotify("GTA V detected.");
+		sysNotify("1.32 GTA V detected.");
 		hookAddress = HookAddress;
 	}
 	else {
@@ -64,7 +64,7 @@ void runSetup() {
 	procWriteBytes(gamePID, SyscallAddress, syscallASM, sizeof(syscallASM));
 
 	u8 hookASM[] = { HookBytes };
-	procWriteBytes(gamePID, hookAddress, hookASM, sizeof(hookASM));
+	procWriteBytes(gamePID, HookAddress, hookASM, sizeof(hookASM));
 
 	procDetach(gamePID);
 }
